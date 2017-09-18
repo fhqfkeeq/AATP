@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('login', 'Auth\LoginController@login')->name('getLogin');
+Route::post('login', 'Auth\LoginController@doLogin')->name('doLogin');
+
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('/', 'IndexController@index')->name('index');
 });
